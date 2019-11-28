@@ -9,6 +9,9 @@ public class SimpleSlickGame  extends BasicGame {
         super(gamename);
     }
 
+
+
+
     @Override
     public void init(GameContainer gc) throws SlickException {}
 
@@ -18,8 +21,13 @@ public class SimpleSlickGame  extends BasicGame {
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException
     {
-        g.drawString("Howdy!", 250, 10);
-        g.drawString("lox", 250, 250);
+        Image img = new Image("resources/2.png");
+
+        g.drawLine(300, 300, 400 , 400);
+        g.setColor(Color.red);
+        g.drawString("Sabre!", 250, 10);
+        g.drawString("Шо", 250, 250);
+        img.draw(400, 400);
     }
 
     public static void main(String[] args)
