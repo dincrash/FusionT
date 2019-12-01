@@ -10,10 +10,15 @@ public class SimpleSlickGame  extends BasicGame {
     }
 
 
-
+    Image background = null;
+    Image img=null;
 
     @Override
-    public void init(GameContainer gc) throws SlickException {}
+    public void init(GameContainer gc) throws SlickException {
+        background = new Image("resources/background.png");
+        img = new Image("resources/2.png");
+
+    }
 
     @Override
     public void update(GameContainer gc, int i) throws SlickException {}
@@ -21,12 +26,12 @@ public class SimpleSlickGame  extends BasicGame {
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException
     {
-        Image img = new Image("resources/2.png");
 
-        g.drawLine(300, 300, 400 , 400);
-        g.setColor(Color.red);
-        g.drawString("Sabre!", 250, 10);
-        g.drawString("Шо", 250, 250);
+//        g.drawLine(300, 300, 400 , 400);
+//        g.setColor(Color.red);
+//        g.drawString("Sabre!", 250, 10);
+//        g.drawString("Шо", 250, 250);
+        g.drawImage(background,0, 0);
         img.draw(400, 400);
     }
 
