@@ -19,8 +19,9 @@ public class MainMenu extends BasicGameState {
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         g.drawImage(background,0, 0);
-        g.setColor(Color.red);
+        g.setColor(Color.green);
         g.drawString("Main Menu", 300, 100);
+        g.drawString("Change Level", 300, 120);
     }
 
     // update-method with all the magic happening in it

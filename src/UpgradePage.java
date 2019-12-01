@@ -23,7 +23,7 @@ public class UpgradePage extends BasicGameState {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         graphics.drawImage(background,0, 0);
-        graphics.setColor(Color.red);
+        graphics.setColor(Color.green);
         graphics.drawString("Upgrade Menu", 300, 100);
     }
 
