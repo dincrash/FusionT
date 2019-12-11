@@ -14,12 +14,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+            <state relative-caret-position="381">
+              <caret line="41" selection-start-line="41" selection-end-line="41" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#489#490#0" expanded="true" />
-                <element signature="e#519#520#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -28,22 +26,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/UpgradePage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
+            <state relative-caret-position="357">
               <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#298#299#0" expanded="true" />
-                <element signature="e#322#323#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ActionPage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="52" column="47" lean-forward="true" selection-start-line="52" selection-start-column="47" selection-end-line="53" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -52,15 +36,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/MainMenu.java">
+        <entry file="file://$PROJECT_DIR$/src/ActionPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="47" lean-forward="true" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
+            <state relative-caret-position="444">
+              <caret line="69" column="16" selection-start-line="69" selection-start-column="16" selection-end-line="69" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#716#717#0" expanded="true" />
-                <element signature="e#750#751#0" expanded="true" />
+                <element signature="e#510#518#0" expanded="true" />
+                <element signature="e#3550#3551#0" expanded="true" />
+                <element signature="e#3583#3584#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/slick/lib/slick.jar!/org/newdawn/slick/opengl/PNGDecoder.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="197">
+              <caret line="197" selection-start-line="197" selection-end-line="197" />
             </state>
           </provider>
         </entry>
@@ -78,6 +72,8 @@
     <findStrings>
       <find>heig</find>
       <find>height</find>
+      <find>getCenterY</find>
+      <find>deg</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -88,13 +84,13 @@
       <list>
         <option value="$PROJECT_DIR$/src/SimpleSlickGame.java" />
         <option value="$PROJECT_DIR$/src/Application.java" />
-        <option value="$PROJECT_DIR$/src/ActionPage.java" />
         <option value="$PROJECT_DIR$/src/UpgradePage.java" />
         <option value="$PROJECT_DIR$/src/MainMenu.java" />
+        <option value="$PROJECT_DIR$/src/ActionPage.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1400" />
@@ -107,7 +103,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -134,6 +129,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -146,7 +142,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1575230398099" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1575412837262" />
     <property name="last_opened_file_path" value="$USER_HOME$/slick/lib/slick.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -203,18 +199,31 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574954299124</updated>
-      <workItem from="1575224702108" duration="4226000" />
+      <workItem from="1575224702108" duration="5624000" />
+      <workItem from="1575385259199" duration="1553000" />
+      <workItem from="1575401631358" duration="3294000" />
+      <workItem from="1575460312781" duration="1222000" />
+      <workItem from="1576080946656" duration="4864000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8005000" />
+    <option name="totallyTimeSpent" value="20336000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26332623" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2739872" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -227,12 +236,12 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -321,16 +330,7 @@
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1574983789568" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/resources/background.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/SimpleSlickGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="66" lean-forward="true" selection-end-line="94" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SimpleSlickGame.java" />
     <entry file="jar://$USER_HOME$/slick/lib/slick.jar!/org/newdawn/slick/Color.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -362,48 +362,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Application.java">
+    <entry file="file://$PROJECT_DIR$/src/MainMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+        <state relative-caret-position="255">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#489#490#0" expanded="true" />
-            <element signature="e#519#520#0" expanded="true" />
+            <element signature="e#716#717#0" expanded="true" />
+            <element signature="e#750#751#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ActionPage.java">
+    <entry file="file://$PROJECT_DIR$/src/resources/bullet.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resources/background.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="jar://$USER_HOME$/slick/lib/slick.jar!/org/newdawn/slick/state/BasicGameState.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="52" column="47" lean-forward="true" selection-start-line="52" selection-start-column="47" selection-end-line="53" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="102">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UpgradePage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
+        <state relative-caret-position="357">
           <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#298#299#0" expanded="true" />
-            <element signature="e#322#323#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainMenu.java">
+    <entry file="jar://$USER_HOME$/slick/lib/slick.jar!/org/newdawn/slick/opengl/PNGDecoder.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="47" lean-forward="true" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
+        <state relative-caret-position="197">
+          <caret line="197" selection-start-line="197" selection-end-line="197" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#716#717#0" expanded="true" />
-            <element signature="e#750#751#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_221/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="431" column="13" selection-start-line="431" selection-start-column="13" selection-end-line="431" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ActionPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="69" column="16" selection-start-line="69" selection-start-column="16" selection-end-line="69" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#510#518#0" expanded="true" />
+            <element signature="e#3550#3551#0" expanded="true" />
+            <element signature="e#3583#3584#0" expanded="true" />
           </folding>
         </state>
       </provider>
