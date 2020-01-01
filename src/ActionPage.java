@@ -28,6 +28,7 @@ public class ActionPage extends BasicGameState {
     private Input input;
     int x;
     int y;
+    float rotation;
     private static int default_bullet_delay = 500;
     private static int time = 0;
     boolean destroy = false;
@@ -36,6 +37,7 @@ public class ActionPage extends BasicGameState {
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         background = new Image("resources/background.png");
+
         img = new Image("resources/resize.png");
         hostile = new Image("resources/tutle.png");
 //        bullet = new Image("resources/bullet.png");
@@ -45,30 +47,22 @@ public class ActionPage extends BasicGameState {
         input = gameContainer.getInput();
         v = 300;
         b = 300;
-
         Rectangle bulletRectangle = new Rectangle(x, y, 128, 128);
         shapeList.add(bulletRectangle);
+        img.setCenterOfRotation((img.getWidth() / 2) * 0.5f, (img.getHeight() / 2) * 0.5f);
+
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
 
         graphics.drawImage(background, 0, 0);
+        img.setRotation(rotation);
         img.draw(v, b, 128, 128);
         if (!destroy) {
             hostile.draw(x, y, 128, 128);
         }
-
-
-        graphics.drawString("w: " + w, 100, 240);
-        graphics.drawString("s: " + s, 100, 260);
-        graphics.drawString("a: " + a, 100, 280);
-        graphics.drawString("d: " + d, 100, 300);
-//        bullet.draw(100,100);
         graphics.setColor(Color.red);
-
-        graphics.drawString("Time : " + time / 1000, 100, 100);
-
         for (int i = 0; i < bulletList.size(); i++) {
             Bullet bullet = bulletList.get(i);
             try {
@@ -83,20 +77,30 @@ public class ActionPage extends BasicGameState {
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+        //forward
         w = gameContainer.getInput().isKeyDown(Input.KEY_W);
-        if (gameContainer.getInput().isKeyDown(Input.KEY_W)) {
+        if (w) {
             b = b - 5;
+
         }
+
+        //bottom
         s = gameContainer.getInput().isKeyDown(Input.KEY_S);
-        if (gameContainer.getInput().isKeyDown(Input.KEY_S)) {
+        if (s) {
             b = b + 5;
+
         }
+        //left
         a = gameContainer.getInput().isKeyDown(Input.KEY_A);
-        if (gameContainer.getInput().isKeyDown(Input.KEY_A)) {
+        if (a) {
             v = v - 5;
+
         }
-        if (gameContainer.getInput().isKeyDown(Input.KEY_D)) {
+        //right
+        d = gameContainer.getInput().isKeyDown(Input.KEY_D);
+        if (d) {
             v = v + 5;
+
         }
         if (input.isKeyPressed(input.KEY_F1)) {
             stateBasedGame.enterState(0);
@@ -116,27 +120,69 @@ public class ActionPage extends BasicGameState {
 
         for (int i = 0; i < bulletList.size(); i++) {
             Bullet bullet = bulletList.get(i);
-            if(!shapeList.isEmpty()) {
+            if (!shapeList.isEmpty()) {
                 for (int d = 0; d < shapeList.size(); d++) {
-                    Shape rectangle = shapeList.get(d);
-
-                if ((shapeList.get(d).getBounds().getX() < bullet.location.x) & (shapeList.get(d).getBounds().getY() < bullet.location.y)) {
-                    if ((bullet.location.x < shapeList.get(d).getBounds().getWidth()) & (bullet.location.y < shapeList.get(d).getBounds().getHeight())) {
-                        bulletList.remove(bullet);
-                        destroy = true;
-                        shapeList.remove(d);
-                    } else {
+                    if ((shapeList.get(d).getBounds().getX() < bullet.location.x) & (shapeList.get(d).getBounds().getY() < bullet.location.y)) {
+                        if ((bullet.location.x < shapeList.get(d).getBounds().getWidth()) & (bullet.location.y < shapeList.get(d).getBounds().getHeight())) {
+                            bulletList.remove(bullet);
+                            destroy = true;
+                            shapeList.remove(d);
+                        } else {
+                        }
                     }
-                }}
+                }
             }
 
         }
+
+        //rotation
+        if ((w && a) || (w && d)) {
+            if (a) {
+                rotation = 315;
+            }
+            if (d) {
+                rotation = 45;
+            }
+        } else if (w) {
+            rotation = 0;
+        } else if (d) {
+            rotation = 90;
+        } else if (a) {
+            rotation = 270;
+        }
+
+        if ((s && a) || (s && d)) {
+            if (a) {
+                rotation = 225;
+            }
+            if (d) {
+                rotation = 135;
+            }
+        }
+        else if (s) {
+            rotation = 180;}
 
     }
 
     private void addNewBullet(int x, int y) {
         try {
-            bulletList.add(new Bullet((int) v + 60, (int) b + 20, x, y));
+            if(rotation==0){
+                bulletList.add(new Bullet((int) v + 60, (int) b + 20, x, y));
+            }
+            if(rotation==45){
+                bulletList.add(new Bullet((int) v + 90, (int) b + 30, x, y));}
+            if(rotation==90){
+                bulletList.add(new Bullet((int) v + 110, (int) b + 65, x, y));}
+            if(rotation==135){
+                bulletList.add(new Bullet((int) v + 105, (int) b + 100, x, y));}
+            if(rotation==180){
+                bulletList.add(new Bullet((int) v + 70, (int) b + 110, x, y));}
+            if(rotation==225){
+                bulletList.add(new Bullet((int) v + 30, (int) b + 110, x, y));}
+            if(rotation==270){
+                bulletList.add(new Bullet((int) v + 20, (int) b + 70, x, y));}
+            if(rotation==315){
+                bulletList.add(new Bullet((int) v + 30, (int) b + 35, x, y));}
         } catch (Exception e) {
             e.printStackTrace();
         }
