@@ -33,6 +33,7 @@ public class ActionPage extends BasicGameState {
     private static int time = 0;
     boolean destroy = false;
     List<Shape> shapeList = new ArrayList<Shape>();
+    List<HostileTank> hostileList = new ArrayList<HostileTank>();
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
@@ -51,6 +52,22 @@ public class ActionPage extends BasicGameState {
         shapeList.add(bulletRectangle);
         img.setCenterOfRotation((img.getWidth() / 2) * 0.5f, (img.getHeight() / 2) * 0.5f);
 
+        int max = 600;
+        int min = 1;
+        int range = max - min + 1;
+
+        // generate random numbers within 1 to 10
+        for (int i = 0; i < 10; i++) {
+            int rand = (int) (Math.random() * range) + min;
+            int gang = (int) (Math.random() * range) + min;
+            HostileTank hostileTank = new HostileTank(img, rand, rand);
+            hostileTank.setX(rand);
+            hostileTank.setY(gang);
+            hostileTank.setImg(img);
+            hostileList.add(hostileTank);
+            // Output is different everytime this code is executed
+            System.out.println(rand);
+        }
     }
 
     @Override
@@ -61,7 +78,14 @@ public class ActionPage extends BasicGameState {
         img.draw(v, b, 128, 128);
         if (!destroy) {
             hostile.draw(x, y, 128, 128);
+
+            for (HostileTank hostild : hostileList
+            ) {
+                hostile.draw(hostild.getX(), hostild.getY(), 128, 128);
+
+            }
         }
+
         graphics.setColor(Color.red);
         for (int i = 0; i < bulletList.size(); i++) {
             Bullet bullet = bulletList.get(i);
@@ -158,31 +182,38 @@ public class ActionPage extends BasicGameState {
             if (d) {
                 rotation = 135;
             }
+        } else if (s) {
+            rotation = 180;
         }
-        else if (s) {
-            rotation = 180;}
 
     }
 
     private void addNewBullet(int x, int y) {
         try {
-            if(rotation==0){
+            if (rotation == 0) {
                 bulletList.add(new Bullet((int) v + 60, (int) b + 20, x, y));
             }
-            if(rotation==45){
-                bulletList.add(new Bullet((int) v + 90, (int) b + 30, x, y));}
-            if(rotation==90){
-                bulletList.add(new Bullet((int) v + 110, (int) b + 65, x, y));}
-            if(rotation==135){
-                bulletList.add(new Bullet((int) v + 105, (int) b + 100, x, y));}
-            if(rotation==180){
-                bulletList.add(new Bullet((int) v + 70, (int) b + 110, x, y));}
-            if(rotation==225){
-                bulletList.add(new Bullet((int) v + 30, (int) b + 110, x, y));}
-            if(rotation==270){
-                bulletList.add(new Bullet((int) v + 20, (int) b + 70, x, y));}
-            if(rotation==315){
-                bulletList.add(new Bullet((int) v + 30, (int) b + 35, x, y));}
+            if (rotation == 45) {
+                bulletList.add(new Bullet((int) v + 90, (int) b + 30, x, y));
+            }
+            if (rotation == 90) {
+                bulletList.add(new Bullet((int) v + 110, (int) b + 65, x, y));
+            }
+            if (rotation == 135) {
+                bulletList.add(new Bullet((int) v + 105, (int) b + 100, x, y));
+            }
+            if (rotation == 180) {
+                bulletList.add(new Bullet((int) v + 70, (int) b + 110, x, y));
+            }
+            if (rotation == 225) {
+                bulletList.add(new Bullet((int) v + 30, (int) b + 110, x, y));
+            }
+            if (rotation == 270) {
+                bulletList.add(new Bullet((int) v + 20, (int) b + 70, x, y));
+            }
+            if (rotation == 315) {
+                bulletList.add(new Bullet((int) v + 30, (int) b + 35, x, y));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
