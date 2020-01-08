@@ -27,6 +27,8 @@ public class ActionPage extends BasicGameState {
     private float b;
     private boolean g;
     private Input input;
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
     int x;
     int y;
     float rotation;
@@ -38,8 +40,8 @@ public class ActionPage extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        background = new Image("resources/background.png");
 
+        background = new Image("resources/background.png");
         img = new Image("resources/resize.png");
         hostile = new Image("resources/tutle.png");
 //        bullet = new Image("resources/bullet.png");
@@ -50,7 +52,6 @@ public class ActionPage extends BasicGameState {
         v = 300;
         b = 300;
         img.setCenterOfRotation((img.getWidth() / 2) * 0.5f, (img.getHeight() / 2) * 0.5f);
-
         int max = 500;
         int min = 100;
         int range = max - min + 1;
@@ -75,6 +76,7 @@ public class ActionPage extends BasicGameState {
 
         graphics.drawImage(background, 0, 0);
         img.setRotation(rotation);
+        restrictedArea(WIDTH,HEIGHT);
         img.draw(v, b, 128, 128);
             for (HostileTank hostild : hostileList
             ) {
@@ -211,6 +213,11 @@ public class ActionPage extends BasicGameState {
         }
     }
 
+    private void restrictedArea(int WIDTH,int HEIGHT){
+        if((img.getCenterOfRotationX()+64)>WIDTH){
+            v=img.getCenterOfRotationX()-64;
+        }
+    }
     @Override
     public int getID() {
         return ActionPage.ID;
