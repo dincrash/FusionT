@@ -12,6 +12,7 @@ public class HostileTank {
         this.img = img;
     }
 
+
     public int getX() {
         return x;
     }

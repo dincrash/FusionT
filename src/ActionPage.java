@@ -7,6 +7,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ActionPage extends BasicGameState {
@@ -48,25 +49,24 @@ public class ActionPage extends BasicGameState {
         input = gameContainer.getInput();
         v = 300;
         b = 300;
-        Rectangle bulletRectangle = new Rectangle(x, y, 128, 128);
-        shapeList.add(bulletRectangle);
         img.setCenterOfRotation((img.getWidth() / 2) * 0.5f, (img.getHeight() / 2) * 0.5f);
 
-        int max = 600;
-        int min = 1;
+        int max = 500;
+        int min = 100;
         int range = max - min + 1;
 
         // generate random numbers within 1 to 10
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             int rand = (int) (Math.random() * range) + min;
             int gang = (int) (Math.random() * range) + min;
             HostileTank hostileTank = new HostileTank(img, rand, rand);
             hostileTank.setX(rand);
             hostileTank.setY(gang);
             hostileTank.setImg(img);
+            Rectangle bulletRectangle = new Rectangle(rand, gang, 128, 128);
+            bulletRectangle.setLocation(rand,gang);
+            shapeList.add(bulletRectangle);
             hostileList.add(hostileTank);
-            // Output is different everytime this code is executed
-            System.out.println(rand);
         }
     }
 
@@ -76,15 +76,10 @@ public class ActionPage extends BasicGameState {
         graphics.drawImage(background, 0, 0);
         img.setRotation(rotation);
         img.draw(v, b, 128, 128);
-        if (!destroy) {
-            hostile.draw(x, y, 128, 128);
-
             for (HostileTank hostild : hostileList
             ) {
-                hostile.draw(hostild.getX(), hostild.getY(), 128, 128);
-
+                    hostile.draw(hostild.getX(), hostild.getY(), 128, 128);
             }
-        }
 
         graphics.setColor(Color.red);
         for (int i = 0; i < bulletList.size(); i++) {
@@ -105,26 +100,22 @@ public class ActionPage extends BasicGameState {
         w = gameContainer.getInput().isKeyDown(Input.KEY_W);
         if (w) {
             b = b - 5;
-
         }
 
         //bottom
         s = gameContainer.getInput().isKeyDown(Input.KEY_S);
         if (s) {
             b = b + 5;
-
         }
         //left
         a = gameContainer.getInput().isKeyDown(Input.KEY_A);
         if (a) {
             v = v - 5;
-
         }
         //right
         d = gameContainer.getInput().isKeyDown(Input.KEY_D);
         if (d) {
             v = v + 5;
-
         }
         if (input.isKeyPressed(input.KEY_F1)) {
             stateBasedGame.enterState(0);
@@ -145,12 +136,13 @@ public class ActionPage extends BasicGameState {
         for (int i = 0; i < bulletList.size(); i++) {
             Bullet bullet = bulletList.get(i);
             if (!shapeList.isEmpty()) {
-                for (int d = 0; d < shapeList.size(); d++) {
-                    if ((shapeList.get(d).getBounds().getX() < bullet.location.x) & (shapeList.get(d).getBounds().getY() < bullet.location.y)) {
-                        if ((bullet.location.x < shapeList.get(d).getBounds().getWidth()) & (bullet.location.y < shapeList.get(d).getBounds().getHeight())) {
+                for (int c = 0; c < shapeList.size(); c++) {
+
+                    if ((shapeList.get(c).getBounds().getX() < bullet.location.x) & (shapeList.get(c).getBounds().getY() < bullet.location.y)) {
+                        if ((bullet.location.x < (shapeList.get(c).getBounds().getX()+shapeList.get(c).getBounds().getWidth())) & (bullet.location.y < (shapeList.get(c).getBounds().getY()+shapeList.get(c).getBounds().getHeight()))) {
                             bulletList.remove(bullet);
-                            destroy = true;
-                            shapeList.remove(d);
+                            hostileList.remove(c);
+                            shapeList.remove(c);
                         } else {
                         }
                     }
