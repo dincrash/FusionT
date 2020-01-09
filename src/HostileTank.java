@@ -3,6 +3,15 @@ public class HostileTank {
     Image img;
     int x;
     int y;
+    boolean hasCollision;
+
+    public boolean isHasCollision() {
+        return hasCollision;
+    }
+
+    public void setHasCollision(boolean hasCollision) {
+        this.hasCollision = hasCollision;
+    }
 
     public Image getImg() {
         return img;
@@ -29,7 +38,7 @@ public class HostileTank {
         this.y = y;
     }
 
-    public HostileTank(Image img, int x, int y) {
+    public HostileTank(Image img, int x, int y,boolean hasCollision) {
 
     }
 

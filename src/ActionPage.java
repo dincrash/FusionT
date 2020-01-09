@@ -59,7 +59,7 @@ public class ActionPage extends BasicGameState {
         for (int i = 0; i < 5; i++) {
             int rand = (int) (Math.random() * range) + min;
             int gang = (int) (Math.random() * range) + min;
-            HostileTank hostileTank = new HostileTank(img, rand, rand);
+            HostileTank hostileTank = new HostileTank(img, rand, rand, false);
             hostileTank.setX(rand);
             hostileTank.setY(gang);
             hostileTank.setImg(img);
@@ -102,10 +102,12 @@ public class ActionPage extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         //forward
-        move = 5;
-        if (hasCollision == true) {
-            v = oldv;
-            b = oldb;
+        for (int i = 0; i < shapeList.size(); i++) {
+            move = 5;
+            if (hostileList.get(i).isHasCollision()) {
+                v = oldv;
+                b = oldb;
+            }
         }
         w = gameContainer.getInput().isKeyDown(Input.KEY_W);
         if (w) {
@@ -131,6 +133,7 @@ public class ActionPage extends BasicGameState {
             oldv = v;
             v = v + move;
         }
+
 
         if (input.isKeyPressed(input.KEY_F1)) {
             stateBasedGame.enterState(0);
@@ -240,14 +243,15 @@ public class ActionPage extends BasicGameState {
     }
 
     private void collisionTanks() {
-        if (imgRectangle.getMinX() < shapeList.get(1).getBounds().getMaxX() && imgRectangle.getMaxX() > shapeList.get(1).getBounds().getMinX() &&
-                imgRectangle.getMinY() < shapeList.get(1).getBounds().getMaxY() && imgRectangle.getMaxY() > shapeList.get(1).getBounds().getMinY()) {
-            hasCollision = true;
+        for (int i = 0; i < shapeList.size(); i++) {
+            if (imgRectangle.getMinX() < shapeList.get(i).getBounds().getMaxX() && imgRectangle.getMaxX() > shapeList.get(i).getBounds().getMinX() &&
+                    imgRectangle.getMinY() < shapeList.get(i).getBounds().getMaxY() && imgRectangle.getMaxY() > shapeList.get(i).getBounds().getMinY()) {
+                hostileList.get(i).setHasCollision(true);
+            } else {
+                hostileList.get(i).setHasCollision(false);
 
-        } else {
-            hasCollision = false;
+            }
         }
-        System.out.println(hasCollision);
     }
 
     @Override
