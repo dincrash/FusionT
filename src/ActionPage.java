@@ -7,7 +7,6 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ActionPage extends BasicGameState {
@@ -53,13 +52,16 @@ public class ActionPage extends BasicGameState {
         b = 300;
         img.setCenterOfRotation((img.getWidth() / 2) * 0.5f, (img.getHeight() / 2) * 0.5f);
 
-        int max = 500;
-        int min = 100;
+        int max = 700;
+        int max2 = 500;
+        int min = 50;
+        int min2 = 50;
         int range = max - min + 1;
+        int range2 = max2 - min2 + 1;
         for (int i = 0; i < 5; i++) {
             int rand = (int) (Math.random() * range) + min;
-            int gang = (int) (Math.random() * range) + min;
-            HostileTank hostileTank = new HostileTank(img, rand, rand, false);
+            int gang = (int) (Math.random() * range2) + min;
+            HostileTank hostileTank = new HostileTank(img, rand, gang, false);
             hostileTank.setX(rand);
             hostileTank.setY(gang);
             hostileTank.setImg(img);
