@@ -27,6 +27,13 @@ public class ActionPage extends BasicGameState {
     private float b;
     private boolean g;
     private Input input;
+<<<<<<< Updated upstream
+=======
+    public static final int MINWIDTH = 0;
+    public static final int WIDTH = 650;
+    public static final int MINHEIGHT = 0;
+    public static final int HEIGHT = 450;
+>>>>>>> Stashed changes
     int x;
     int y;
     float rotation;
@@ -38,8 +45,13 @@ public class ActionPage extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+<<<<<<< Updated upstream
         background = new Image("resources/background.png");
 
+=======
+
+        background = new Image("resources/background2.jpg");
+>>>>>>> Stashed changes
         img = new Image("resources/resize.png");
         hostile = new Image("resources/tutle.png");
 //        bullet = new Image("resources/bullet.png");
@@ -73,8 +85,12 @@ public class ActionPage extends BasicGameState {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
 
-        graphics.drawImage(background, 0, 0);
+        background.draw(0,0,800,600);
         img.setRotation(rotation);
+<<<<<<< Updated upstream
+=======
+        restrictedArea();
+>>>>>>> Stashed changes
         img.draw(v, b, 128, 128);
             for (HostileTank hostild : hostileList
             ) {
@@ -211,6 +227,23 @@ public class ActionPage extends BasicGameState {
         }
     }
 
+<<<<<<< Updated upstream
+=======
+    private void restrictedArea(){
+        if(v>WIDTH){
+            v=WIDTH;
+        }
+        else if (v<MINWIDTH){
+            v=MINWIDTH;
+        }
+        if(b>HEIGHT){
+            b=HEIGHT;
+        }
+        else if (b<MINHEIGHT){
+            b=MINHEIGHT;
+        }
+    }
+>>>>>>> Stashed changes
     @Override
     public int getID() {
         return ActionPage.ID;
