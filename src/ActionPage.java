@@ -11,12 +11,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ActionPage extends BasicGameState {
-
+    private int move;
     public static final int ID = 1;
     Image background = null;
     Image img = null;
     Image hostile = null;
-    Image bullet = null;
+    Rectangle imgRectangle = null;
     private ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
     private boolean w;
     private boolean s;
@@ -25,26 +25,22 @@ public class ActionPage extends BasicGameState {
     private AppGameContainer app;
     private float v;
     private float b;
-    private boolean g;
     private Input input;
     public static final int MINWIDTH = 0;
     public static final int WIDTH = 650;
     public static final int MINHEIGHT = 0;
     public static final int HEIGHT = 450;
-    int x;
-    int y;
     float rotation;
     private static int default_bullet_delay = 500;
     private static int time = 0;
-    boolean destroy = false;
     List<Shape> shapeList = new ArrayList<Shape>();
     List<HostileTank> hostileList = new ArrayList<HostileTank>();
+    private boolean hasCollision = false;
+    private float oldb;
+    private float oldv;
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        background = new Image("resources/background.png");
-
-
         background = new Image("resources/background2.jpg");
         img = new Image("resources/resize.png");
         hostile = new Image("resources/tutle.png");
@@ -60,8 +56,6 @@ public class ActionPage extends BasicGameState {
         int max = 500;
         int min = 100;
         int range = max - min + 1;
-
-        // generate random numbers within 1 to 10
         for (int i = 0; i < 5; i++) {
             int rand = (int) (Math.random() * range) + min;
             int gang = (int) (Math.random() * range) + min;
@@ -69,24 +63,28 @@ public class ActionPage extends BasicGameState {
             hostileTank.setX(rand);
             hostileTank.setY(gang);
             hostileTank.setImg(img);
-            Rectangle bulletRectangle = new Rectangle(rand, gang, 128, 128);
-            bulletRectangle.setLocation(rand,gang);
+            Rectangle bulletRectangle = new Rectangle(rand, gang, 80, 80);
+            bulletRectangle.setLocation(rand, gang);
             shapeList.add(bulletRectangle);
             hostileList.add(hostileTank);
         }
+        imgRectangle = new Rectangle((int) v, (int) b, 80, 80);
+
     }
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-
-        background.draw(0,0,800,600);
+        background.draw(0, 0, 800, 600);
         img.setRotation(rotation);
         restrictedArea();
+        collisionTanks();
+
+        imgRectangle = new Rectangle((int) v, (int) b, 80, 80);
         img.draw(v, b, 128, 128);
-            for (HostileTank hostild : hostileList
-            ) {
-                    hostile.draw(hostild.getX(), hostild.getY(), 128, 128);
-            }
+        for (HostileTank hostild : hostileList
+        ) {
+            hostile.draw(hostild.getX(), hostild.getY(), 128, 128);
+        }
 
         graphics.setColor(Color.red);
         for (int i = 0; i < bulletList.size(); i++) {
@@ -104,26 +102,36 @@ public class ActionPage extends BasicGameState {
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
         //forward
+        move = 5;
+        if (hasCollision == true) {
+            v = oldv;
+            b = oldb;
+        }
         w = gameContainer.getInput().isKeyDown(Input.KEY_W);
         if (w) {
-            b = b - 5;
+            oldb = b;
+            b = b - move;
         }
 
         //bottom
         s = gameContainer.getInput().isKeyDown(Input.KEY_S);
         if (s) {
-            b = b + 5;
+            oldb = b;
+            b = b + move;
         }
         //left
         a = gameContainer.getInput().isKeyDown(Input.KEY_A);
         if (a) {
-            v = v - 5;
+            oldv = v;
+            v = v - move;
         }
         //right
         d = gameContainer.getInput().isKeyDown(Input.KEY_D);
         if (d) {
-            v = v + 5;
+            oldv = v;
+            v = v + move;
         }
+
         if (input.isKeyPressed(input.KEY_F1)) {
             stateBasedGame.enterState(0);
         }
@@ -146,7 +154,7 @@ public class ActionPage extends BasicGameState {
                 for (int c = 0; c < shapeList.size(); c++) {
 
                     if ((shapeList.get(c).getBounds().getX() < bullet.location.x) & (shapeList.get(c).getBounds().getY() < bullet.location.y)) {
-                        if ((bullet.location.x < (shapeList.get(c).getBounds().getX()+shapeList.get(c).getBounds().getWidth())) & (bullet.location.y < (shapeList.get(c).getBounds().getY()+shapeList.get(c).getBounds().getHeight()))) {
+                        if ((bullet.location.x < (shapeList.get(c).getBounds().getX() + shapeList.get(c).getBounds().getWidth())) & (bullet.location.y < (shapeList.get(c).getBounds().getY() + shapeList.get(c).getBounds().getHeight()))) {
                             bulletList.remove(bullet);
                             hostileList.remove(c);
                             shapeList.remove(c);
@@ -218,20 +226,30 @@ public class ActionPage extends BasicGameState {
         }
     }
 
-    private void restrictedArea(){
-        if(v>WIDTH){
-            v=WIDTH;
+    private void restrictedArea() {
+        if (v > WIDTH) {
+            v = WIDTH;
+        } else if (v < MINWIDTH) {
+            v = MINWIDTH;
         }
-        else if (v<MINWIDTH){
-            v=MINWIDTH;
-        }
-        if(b>HEIGHT){
-            b=HEIGHT;
-        }
-        else if (b<MINHEIGHT){
-            b=MINHEIGHT;
+        if (b > HEIGHT) {
+            b = HEIGHT;
+        } else if (b < MINHEIGHT) {
+            b = MINHEIGHT;
         }
     }
+
+    private void collisionTanks() {
+        if (imgRectangle.getMinX() < shapeList.get(1).getBounds().getMaxX() && imgRectangle.getMaxX() > shapeList.get(1).getBounds().getMinX() &&
+                imgRectangle.getMinY() < shapeList.get(1).getBounds().getMaxY() && imgRectangle.getMaxY() > shapeList.get(1).getBounds().getMinY()) {
+            hasCollision = true;
+
+        } else {
+            hasCollision = false;
+        }
+        System.out.println(hasCollision);
+    }
+
     @Override
     public int getID() {
         return ActionPage.ID;
