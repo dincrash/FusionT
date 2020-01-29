@@ -37,6 +37,7 @@ public class ActionPage extends BasicGameState {
     private boolean hasCollision = false;
     private float oldb;
     private float oldv;
+    String tankname="1";
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
@@ -51,26 +52,8 @@ public class ActionPage extends BasicGameState {
         v = 300;
         b = 300;
         img.setCenterOfRotation((img.getWidth() / 2) * 0.5f, (img.getHeight() / 2) * 0.5f);
+        createHostileTanks();
 
-        int max = 700;
-        int max2 = 500;
-        int min = 50;
-        int min2 = 50;
-        int range = max - min + 1;
-        int range2 = max2 - min2 + 1;
-        for (int i = 0; i < 5; i++) {
-            int rand = (int) (Math.random() * range) + min;
-            int gang = (int) (Math.random() * range2) + min;
-            HostileTank hostileTank = new HostileTank(img, rand, gang, false);
-            hostileTank.setX(rand);
-            hostileTank.setY(gang);
-            hostileTank.setImg(img);
-            Rectangle bulletRectangle = new Rectangle(rand, gang, 80, 80);
-            bulletRectangle.setLocation(rand, gang);
-            shapeList.add(bulletRectangle);
-            hostileList.add(hostileTank);
-        }
-        imgRectangle = new Rectangle((int) v, (int) b, 80, 80);
 
     }
 
@@ -80,7 +63,7 @@ public class ActionPage extends BasicGameState {
         img.setRotation(rotation);
         restrictedArea();
         collisionTanks();
-
+        graphics.drawString(tankname, 10, 30);
         imgRectangle = new Rectangle((int) v, (int) b, 80, 80);
         img.draw(v, b, 128, 128);
         for (HostileTank hostild : hostileList
@@ -162,6 +145,7 @@ public class ActionPage extends BasicGameState {
                         if ((bullet.location.x < (shapeList.get(c).getBounds().getX() + shapeList.get(c).getBounds().getWidth())) & (bullet.location.y < (shapeList.get(c).getBounds().getY() + shapeList.get(c).getBounds().getHeight()))) {
                             bulletList.remove(bullet);
                             hostileList.remove(c);
+                            tankname = Integer.toString(c);
                             shapeList.remove(c);
                         } else {
                         }
@@ -254,6 +238,56 @@ public class ActionPage extends BasicGameState {
 
             }
         }
+    }
+
+    private void createHostileTanks() {
+//int x,int y,int b,int d
+        int max = 700;
+        int max2 = 500;
+        int min = 50;
+        int min2 = 50;
+        int range = max - min + 1;
+        int range2 = max2 - min2 + 1;
+        boolean notcol = false;
+        //quantity hostiletanks
+        int quantity = 5;
+        for (int i = 0; i < quantity; i++) {
+            int rand = (int) (Math.random() * range) + min;
+            int gang = (int) (Math.random() * range2) + min;
+            HostileTank hostileTank = new HostileTank(img, rand, gang, false);
+            hostileTank.setX(rand);
+            hostileTank.setY(gang);
+            hostileTank.setImg(img);
+            Rectangle bulletRectangle = new Rectangle(rand, gang, 80, 80);
+            bulletRectangle.setLocation(rand, gang);
+            for (int b = 0; b < shapeList.size(); b++) {
+                if (rand < shapeList.get(b).getBounds().getMaxX() && rand + 80 > shapeList.get(b).getBounds().getMinX() &&
+                        gang < shapeList.get(b).getBounds().getMaxY() && gang + 80 > shapeList.get(b).getBounds().getMinY()) {
+                    notcol = true;
+                } else {
+                    notcol = false;
+                }
+            }
+            System.out.println(notcol);
+
+            if (notcol = true) {
+                shapeList.add(bulletRectangle);
+                hostileList.add(hostileTank);
+            }
+
+//            if((shapeList.size()<4)){
+//                quantity=quantity+1;
+//            }
+            System.out.println(shapeList.size());
+//            System.out.println(shapeList.get(i));
+        }
+
+
+        imgRectangle = new Rectangle((int) v, (int) b, 80, 80);
+
+//        if((x==y)&&(b==d)){
+//            return;
+//        }
     }
 
     @Override

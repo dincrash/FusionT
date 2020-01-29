@@ -30,7 +30,7 @@ public class Bullet {
         this.dy = -(float) Math.cos(rad) * speed;
     }
 
-        public void recalculateVector()
+    public void recalculateVector()
         {
             recalculateVector(destX, destY);
         }
