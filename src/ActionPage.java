@@ -38,7 +38,7 @@ public class ActionPage extends BasicGameState {
     private float oldb;
     private float oldv;
     String tankname="1";
-
+    boolean notcol = false;
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         background = new Image("resources/background2.jpg");
@@ -241,14 +241,14 @@ public class ActionPage extends BasicGameState {
     }
 
     private void createHostileTanks() {
-//int x,int y,int b,int d
+        //int x,int y,int b,int d
         int max = 700;
         int max2 = 500;
         int min = 50;
         int min2 = 50;
         int range = max - min + 1;
         int range2 = max2 - min2 + 1;
-        boolean notcol = false;
+
         //quantity hostiletanks
         int quantity = 5;
         for (int i = 0; i < quantity; i++) {
@@ -260,36 +260,37 @@ public class ActionPage extends BasicGameState {
             hostileTank.setImg(img);
             Rectangle bulletRectangle = new Rectangle(rand, gang, 80, 80);
             bulletRectangle.setLocation(rand, gang);
-            for (int b = 0; b < shapeList.size(); b++) {
-                if (rand < shapeList.get(b).getBounds().getMaxX() && rand + 80 > shapeList.get(b).getBounds().getMinX() &&
-                        gang < shapeList.get(b).getBounds().getMaxY() && gang + 80 > shapeList.get(b).getBounds().getMinY()) {
-                    notcol = true;
-                } else {
-                    notcol = false;
-                }
+            checkOnCreateCollision(rand,gang);
+//            System.out.println(notcol +" " + rand +" "+ gang);
+            if(notcol==false){
+              addTank(rand,gang);
             }
-            System.out.println(notcol);
-
-            if (notcol = true) {
-                shapeList.add(bulletRectangle);
-                hostileList.add(hostileTank);
-            }
-
-//            if((shapeList.size()<4)){
-//                quantity=quantity+1;
-//            }
-            System.out.println(shapeList.size());
-//            System.out.println(shapeList.get(i));
+//            System.out.println(shapeList.size());
         }
-
-
         imgRectangle = new Rectangle((int) v, (int) b, 80, 80);
-
-//        if((x==y)&&(b==d)){
-//            return;
-//        }
+    }
+    public void addTank(int rand,int gang){
+        Rectangle bulletRectangle = new Rectangle(rand, gang, 80, 80);
+        HostileTank hostileTank = new HostileTank(img, rand, gang, false);
+        shapeList.add(bulletRectangle);
+        hostileList.add(hostileTank);
+        hostileTank.setX(rand);
+        hostileTank.setY(gang);
+        hostileTank.setImg(img);
+        bulletRectangle.setLocation(rand, gang);
     }
 
+    public void checkOnCreateCollision(int rand,int gang){
+        for (int b = 0; b < shapeList.size(); b++) {
+            if (rand < shapeList.get(b).getBounds().getMaxX() && rand + 80 > shapeList.get(b).getBounds().getMinX() &&
+                    gang < shapeList.get(b).getBounds().getMaxY() && gang + 80 > shapeList.get(b).getBounds().getMinY()) {
+                notcol = true;
+                break;
+            } else {
+                notcol = false;
+            }
+        }
+    }
     @Override
     public int getID() {
         return ActionPage.ID;
