@@ -32,7 +32,7 @@ public class ActionPage extends BasicGameState {
     float rotation;
     private static int default_bullet_delay = 500;
     private static int time = 0;
-    List<Shape> shapeList = new ArrayList<Shape>();
+    List<Shape> tanksShapeList = new ArrayList<Shape>();
     List<HostileTank> hostileList = new ArrayList<HostileTank>();
     private boolean hasCollision = false;
     private float oldb;
@@ -53,7 +53,6 @@ public class ActionPage extends BasicGameState {
         b = 300;
         img.setCenterOfRotation((img.getWidth() / 2) * 0.5f, (img.getHeight() / 2) * 0.5f);
         createHostileTanks();
-
 
     }
 
@@ -82,12 +81,22 @@ public class ActionPage extends BasicGameState {
             }
 
         }
+
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int delta) throws SlickException {
+        for (HostileTank hostild : hostileList
+        ) {
+            hostild.setY(hostild.getY()-1);
+        }
+//        System.out.println(tanksShapeList.get(0).getBounds().getX());
+//        tanksShapeList.get(0).getBounds().setLocation(100,100);
+//        System.out.println(tanksShapeList.get(0).getBounds().getX());
+
+//        System.out.println(tanksShapeList.get(0));
         //forward
-        for (int i = 0; i < shapeList.size(); i++) {
+        for (int i = 0; i < tanksShapeList.size(); i++) {
             move = 5;
             if (hostileList.get(i).isHasCollision()) {
                 v = oldv;
@@ -138,15 +147,15 @@ public class ActionPage extends BasicGameState {
 
         for (int i = 0; i < bulletList.size(); i++) {
             Bullet bullet = bulletList.get(i);
-            if (!shapeList.isEmpty()) {
-                for (int c = 0; c < shapeList.size(); c++) {
+            if (!tanksShapeList.isEmpty()) {
+                for (int c = 0; c < tanksShapeList.size(); c++) {
 
-                    if ((shapeList.get(c).getBounds().getX() < bullet.location.x) & (shapeList.get(c).getBounds().getY() < bullet.location.y)) {
-                        if ((bullet.location.x < (shapeList.get(c).getBounds().getX() + shapeList.get(c).getBounds().getWidth())) & (bullet.location.y < (shapeList.get(c).getBounds().getY() + shapeList.get(c).getBounds().getHeight()))) {
+                    if ((tanksShapeList.get(c).getBounds().getX() < bullet.location.x) & (tanksShapeList.get(c).getBounds().getY() < bullet.location.y)) {
+                        if ((bullet.location.x < (tanksShapeList.get(c).getBounds().getX() + tanksShapeList.get(c).getBounds().getWidth())) & (bullet.location.y < (tanksShapeList.get(c).getBounds().getY() + tanksShapeList.get(c).getBounds().getHeight()))) {
                             bulletList.remove(bullet);
                             hostileList.remove(c);
                             tankname = Integer.toString(c);
-                            shapeList.remove(c);
+                            tanksShapeList.remove(c);
                         } else {
                         }
                     }
@@ -229,9 +238,9 @@ public class ActionPage extends BasicGameState {
     }
 
     private void collisionTanks() {
-        for (int i = 0; i < shapeList.size(); i++) {
-            if (imgRectangle.getMinX() < shapeList.get(i).getBounds().getMaxX() && imgRectangle.getMaxX() > shapeList.get(i).getBounds().getMinX() &&
-                    imgRectangle.getMinY() < shapeList.get(i).getBounds().getMaxY() && imgRectangle.getMaxY() > shapeList.get(i).getBounds().getMinY()) {
+        for (int i = 0; i < tanksShapeList.size(); i++) {
+            if (imgRectangle.getMinX() < tanksShapeList.get(i).getBounds().getMaxX() && imgRectangle.getMaxX() > tanksShapeList.get(i).getBounds().getMinX() &&
+                    imgRectangle.getMinY() < tanksShapeList.get(i).getBounds().getMaxY() && imgRectangle.getMaxY() > tanksShapeList.get(i).getBounds().getMinY()) {
                 hostileList.get(i).setHasCollision(true);
             } else {
                 hostileList.get(i).setHasCollision(false);
@@ -250,7 +259,7 @@ public class ActionPage extends BasicGameState {
         int range2 = max2 - min2 + 1;
 
         //quantity hostiletanks
-        int quantity = 5;
+        int quantity = 2;
         for (int i = 0; i < quantity; i++) {
             int rand = (int) (Math.random() * range) + min;
             int gang = (int) (Math.random() * range2) + min;
@@ -258,32 +267,30 @@ public class ActionPage extends BasicGameState {
             hostileTank.setX(rand);
             hostileTank.setY(gang);
             hostileTank.setImg(img);
-            Rectangle bulletRectangle = new Rectangle(rand, gang, 80, 80);
-            bulletRectangle.setLocation(rand, gang);
-            checkOnCreateCollision(rand,gang);
+        checkOnCreateCollision(rand,gang);
 //            System.out.println(notcol +" " + rand +" "+ gang);
-            if(notcol==false){
-              addTank(rand,gang);
-            }
-//            System.out.println(shapeList.size());
+        if(notcol==false){
+            addTank(rand,gang);
         }
-        imgRectangle = new Rectangle((int) v, (int) b, 80, 80);
+//            System.out.println(shapeList.size());
     }
+    imgRectangle = new Rectangle((int) v, (int) b, 80, 80);
+}
     public void addTank(int rand,int gang){
-        Rectangle bulletRectangle = new Rectangle(rand, gang, 80, 80);
+        Rectangle hostileRectangle = new Rectangle(rand, gang, 80, 80);
         HostileTank hostileTank = new HostileTank(img, rand, gang, false);
-        shapeList.add(bulletRectangle);
+        tanksShapeList.add(hostileRectangle);
+
         hostileList.add(hostileTank);
         hostileTank.setX(rand);
         hostileTank.setY(gang);
         hostileTank.setImg(img);
-        bulletRectangle.setLocation(rand, gang);
     }
 
     public void checkOnCreateCollision(int rand,int gang){
-        for (int b = 0; b < shapeList.size(); b++) {
-            if (rand < shapeList.get(b).getBounds().getMaxX() && rand + 80 > shapeList.get(b).getBounds().getMinX() &&
-                    gang < shapeList.get(b).getBounds().getMaxY() && gang + 80 > shapeList.get(b).getBounds().getMinY()) {
+        for (int b = 0; b < tanksShapeList.size(); b++) {
+            if (rand < tanksShapeList.get(b).getBounds().getMaxX() && rand + 80 > tanksShapeList.get(b).getBounds().getMinX() &&
+                    gang < tanksShapeList.get(b).getBounds().getMaxY() && gang + 80 > tanksShapeList.get(b).getBounds().getMinY()) {
                 notcol = true;
                 break;
             } else {
